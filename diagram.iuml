@@ -1,0 +1,29 @@
+@startuml
+
+package "Module" {
+
+
+package Aggregate {
+ package "Domain" {
+ component [InputPorts] #AliceBlue
+ component [Entities] #TECHNOLOGY
+ component [OutputPorts] #AliceBlue
+ component [Interactors] #TECHNOLOGY
+
+ [Interactors] -up-> [InputPorts] : impl
+ [Interactors] .down.> [Entities] : use
+ [Interactors] .down.> [OutputPorts] : use
+}
+
+[Controllers] ..> [InputPorts] : use
+
+package "DAL" {
+[Repositories] -up-> [OutputPorts] : impl
+[Repositories] .down.> [ORM Entities] : use
+[Repositories] .down.> [Mappers] : use
+}
+}
+}
+
+
+@enduml
