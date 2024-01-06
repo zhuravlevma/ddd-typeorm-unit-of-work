@@ -9,13 +9,14 @@ import { SaveReportOutPort } from '../ports/out/save-report.out-port';
 import { randomUUID } from 'crypto';
 import { OfferEntity } from 'src/delivery/offer/domain/entities/offer.entity';
 import { SaveOfferOutPort } from 'src/delivery/offer/domain/ports/out/save-offer.out-port';
+import { EntityManager } from 'typeorm';
 
 export class UpdateReportInteractor implements UpdateReportInPort {
   constructor(
     private readonly findReportById: FindReportByIdOutPort,
     private readonly saveReportPort: SaveReportOutPort,
     private readonly saveOfferOutPort: SaveOfferOutPort,
-    private readonly uow: UnitOfWork,
+    private readonly uow: UnitOfWork<EntityManager>,
   ) {}
 
   async execute(updatePositionDto: UpdateReportDto): Promise<ReportEntity> {
@@ -32,7 +33,7 @@ export class UpdateReportInteractor implements UpdateReportInPort {
         deliverymanId: null,
       });
 
-      return this.uow.doTransactional(async (tx) => {
+      return this.uow.runInTransaction(async (tx) => {
         const updatedReport = await this.saveReportPort.save(report, tx);
         await this.saveOfferOutPort.saveOffer(offer, tx);
         return updatedReport;

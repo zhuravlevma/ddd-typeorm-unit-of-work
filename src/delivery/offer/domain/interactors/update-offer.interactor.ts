@@ -10,12 +10,13 @@ import { FindDeliverymanByIdWithOrdersOutPort } from 'src/delivery/deliveryman/d
 import { SaveDeliverymanOutPort } from 'src/delivery/deliveryman/domain/ports/out/save-deliveryman.out-port';
 import { OrderEntity } from 'src/delivery/deliveryman/domain/entities/order.entity';
 import { randomUUID } from 'crypto';
+import { EntityManager } from 'typeorm';
 
 export class UpdateOfferInteractor implements UpdateOfferInPort {
   constructor(
     private readonly findOfferByIdPort: FindOfferByIdOutPort,
     private readonly saveOfferPort: SaveOfferOutPort,
-    private readonly uow: UnitOfWork,
+    private readonly uow: UnitOfWork<EntityManager>,
     private readonly findDeliverymanByIdWithOrdersPort: FindDeliverymanByIdWithOrdersOutPort,
     private readonly saveDeliverymanPort: SaveDeliverymanOutPort,
   ) {}
@@ -45,7 +46,7 @@ export class UpdateOfferInteractor implements UpdateOfferInPort {
           }),
         );
 
-        return this.uow.doTransactional(async (tx) => {
+        return this.uow.runInTransaction(async (tx) => {
           const updatedOffer = await this.saveOfferPort.saveOffer(offer, tx);
           this.saveDeliverymanPort.save(deliverymanWithOrders, tx);
           return updatedOffer;

@@ -9,12 +9,13 @@ import { SaveWarehouseOutPort } from '../ports/out/save-warehouse.out-port';
 import { randomUUID } from 'crypto';
 import { ReportEntity } from 'src/accounting/report/domain/entities/report.entity';
 import { SaveReportOutPort } from 'src/accounting/report/domain/ports/out/save-report.out-port';
+import { EntityManager } from 'typeorm';
 
 export class UpdateOrderInteractor implements UpdateOrderInPort {
   constructor(
     private readonly getWarehouseWithOrderPort: GetWarehouseWithOrderOutPort,
     private readonly saveWhPort: SaveWarehouseOutPort,
-    private readonly uow: UnitOfWork,
+    private readonly uow: UnitOfWork<EntityManager>,
     private readonly saveReport: SaveReportOutPort,
   ) {}
   async execute(
@@ -36,7 +37,7 @@ export class UpdateOrderInteractor implements UpdateOrderInPort {
         positions: [],
       });
 
-      return this.uow.doTransactional(async (tx) => {
+      return this.uow.runInTransaction(async (tx) => {
         const updatedWh = await this.saveWhPort.saveWarehouse(warehouse, tx);
         await this.saveReport.save(report, tx);
         return updatedWh;

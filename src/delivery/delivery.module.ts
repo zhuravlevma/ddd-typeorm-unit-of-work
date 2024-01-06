@@ -36,7 +36,7 @@ import { GeneralController } from './general/general.controller';
 import { GetShareOffersToFreeDeliverymansInteractor } from './general/domain/interactors/get-share-offers-to-free-deliverymans.interactor';
 import { GetShareOffersToFreeDeliverymansInPort } from './general/domain/ports/in/get-share-offers-to-free-deliverymans.in-port';
 import { CreateDeliverymanOutPort } from './deliveryman/domain/ports/out/create-deliveryman.out-port';
-import { UnitOfWork } from 'src/unit-of-work/uow';
+import { TypeOrmUnitOfWork, UnitOfWork } from 'src/unit-of-work/uow';
 import { UowModule } from 'src/unit-of-work/uow.module';
 
 @Module({
@@ -131,7 +131,7 @@ import { UowModule } from 'src/unit-of-work/uow.module';
       inject: [
         FindOfferByIdOutPort,
         SaveOfferOutPort,
-        UnitOfWork,
+        TypeOrmUnitOfWork,
         FindDeliverymanByIdWithOrdersOutPort,
         SaveDeliverymanOutPort,
       ],

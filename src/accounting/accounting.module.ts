@@ -14,7 +14,7 @@ import { FindPositionByIdOutPort } from './report/domain/ports/out/find-position
 import { FindReportByIdOutPort } from './report/domain/ports/out/find-report-by-id.out-port';
 import { SaveReportOutPort } from './report/domain/ports/out/save-report.out-port';
 import { UowModule } from 'src/unit-of-work/uow.module';
-import { UnitOfWork } from 'src/unit-of-work/uow';
+import { TypeOrmUnitOfWork } from 'src/unit-of-work/uow';
 import { SaveOfferOutPort } from 'src/delivery/offer/domain/ports/out/save-offer.out-port';
 import { DeliveryModule } from 'src/delivery/delivery.module';
 
@@ -33,7 +33,7 @@ import { DeliveryModule } from 'src/delivery/delivery.module';
         FindReportByIdOutPort,
         SaveReportOutPort,
         SaveOfferOutPort,
-        UnitOfWork,
+        TypeOrmUnitOfWork,
       ],
     },
     {

@@ -14,7 +14,7 @@ import { WarehouseController } from './warehouse/warehouse.controller';
 import { WarehouseOrmEntity } from './warehouse/dal/orm-entities/warehouse.orm-entity';
 import { WarehouseRepository } from './warehouse/dal/warehouse.repository';
 import { UowModule } from 'src/unit-of-work/uow.module';
-import { UnitOfWork } from 'src/unit-of-work/uow';
+import { TypeOrmUnitOfWork } from 'src/unit-of-work/uow';
 import { SaveReportOutPort } from 'src/accounting/report/domain/ports/out/save-report.out-port';
 import { AccountingModule } from 'src/accounting/accounting.module';
 
@@ -33,7 +33,7 @@ import { AccountingModule } from 'src/accounting/accounting.module';
       inject: [
         SaveWarehouseOutPort,
         GetWarehouseWithOrderOutPort,
-        UnitOfWork,
+        TypeOrmUnitOfWork,
         SaveReportOutPort,
       ],
     },

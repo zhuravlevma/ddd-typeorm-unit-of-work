@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { UnitOfWork } from './uow';
+import { TypeOrmUnitOfWork } from './uow';
 
 @Module({
   imports: [],
   controllers: [],
-  providers: [UnitOfWork],
-  exports: [UnitOfWork],
+  providers: [TypeOrmUnitOfWork],
+  exports: [TypeOrmUnitOfWork],
 })
 export class UowModule {}
