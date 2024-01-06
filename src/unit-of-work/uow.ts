@@ -1,7 +1,7 @@
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
 export abstract class UnitOfWork<C> {
-  abstract runInTransaction<R>(fn: (manager?: any) => Promise<R>): Promise<R>;
+  abstract runInTransaction<R>(fn: (manager: C) => Promise<R>): Promise<R>;
 }
 
 class Transaction implements UnitOfWork<EntityManager> {
