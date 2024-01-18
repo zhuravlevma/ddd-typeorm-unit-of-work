@@ -16,7 +16,7 @@ return this.uow.runInTransaction(async (tx) => {
 
 ## Architecture
 
-![example-uml](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/zhuravlevma/nestjs-ddd-clean-architecture-unit-of-work/main/diagram.iuml)
+![image](https://github.com/zhuravlevma/ddd-typeorm-unit-of-work/assets/44276887/43a82b2e-3d1e-4646-b37a-3325ac82e730)
 
 ### Module boundaries
 
