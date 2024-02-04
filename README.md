@@ -8,15 +8,15 @@ patterns from DDD.
 
 ```typescript
 return this.uow.runInTransaction(async (tx) => {
-    const updatedWh = await this.saveWh.saveWarehouse(warehouse, tx);
-    await this.saveReport.save(report, tx);
-    return updatedWh;
+  const updatedWh = await this.saveWh.saveWarehouse(warehouse, tx);
+  await this.saveReport.save(report, tx);
+  return updatedWh;
 });
 ```
 
 ## Architecture
 
-![image](https://github.com/zhuravlevma/ddd-typeorm-unit-of-work/assets/44276887/43a82b2e-3d1e-4646-b37a-3325ac82e730)
+<img src='https://github.com/zhuravlevma/ddd-typeorm-unit-of-work/assets/44276887/43a82b2e-3d1e-4646-b37a-3325ac82e730' alt="architecture schema" width='50%'>
 
 ### Module boundaries
 
